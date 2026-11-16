@@ -38,7 +38,7 @@ make wave         # open the last waveform in GTKWave
 See [CONTRIBUTING.md](CONTRIBUTING.md). Short version: do not edit someone else's file without telling them, pull before you push, small commits.
 
 ## Task tracking
-The full task list is in `docs/Quantum_Simulator_Task_Tracker.xlsx` (also shared as a Google Sheet).
+[The full task list is in `docs/Quantum_Simulator_Task_Tracker.xlsx` (also shared as a Google Sheet).](https://docs.google.com/spreadsheets/d/1f9KYtxLYgghSqlzP0LpLPKinvu2iCrE3ZRo0i_cdM8o/edit?gid=1471018770#gid=1471018770)
 
 ## Conventions (must stay consistent across RTL and Python)
 Fill these in `docs/conventions.md` before writing RTL:
