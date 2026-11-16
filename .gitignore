@@ -1,0 +1,43 @@
+# Simulation outputs
+*.out
+*.vvp
+*.vcd
+*.fst
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Cadence tool work directories / logs (keep reports: *.rpt)
+genus.log*
+genus.cmd*
+innovus.log*
+innovus.cmd*
+innovus.logv*
+fv/
+.cadence/
+*.enc.dat/
+*.enc
+*.tmp
+rc_model.bin
+
+# Large layout / timing outputs - share via drive, not git
+*.gds
+*.gds2
+*.oas
+*.sdf
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+
+# Secrets
+*.key
+*.pem
+.env
