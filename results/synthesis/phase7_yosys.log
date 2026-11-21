@@ -1,0 +1,757 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.33 (git sha1 2584903a060)
+
+
+-- Running command `read_verilog -sv -Irtl rtl/*.v; hierarchy -check -top qsim_parallel_top; proc; check' --
+
+1. Executing Verilog-2005 frontend: rtl/addr_gen.v
+Parsing SystemVerilog input from `rtl/addr_gen.v' to AST representation.
+Generating RTLIL representation for module `\addr_gen'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: rtl/control_mask.v
+Parsing SystemVerilog input from `rtl/control_mask.v' to AST representation.
+Generating RTLIL representation for module `\control_mask'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: rtl/controller.v
+Parsing SystemVerilog input from `rtl/controller.v' to AST representation.
+Generating RTLIL representation for module `\qsim_controller'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: rtl/fx_arith.v
+Parsing SystemVerilog input from `rtl/fx_arith.v' to AST representation.
+Generating RTLIL representation for module `\fx_arith'.
+Generating RTLIL representation for module `\fx_negate'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: rtl/gate_cnot.v
+Parsing SystemVerilog input from `rtl/gate_cnot.v' to AST representation.
+Generating RTLIL representation for module `\gate_cnot'.
+Successfully finished Verilog frontend.
+
+6. Executing Verilog-2005 frontend: rtl/gate_datapath.v
+Parsing SystemVerilog input from `rtl/gate_datapath.v' to AST representation.
+Generating RTLIL representation for module `\gate_datapath'.
+Successfully finished Verilog frontend.
+
+7. Executing Verilog-2005 frontend: rtl/gate_h.v
+Parsing SystemVerilog input from `rtl/gate_h.v' to AST representation.
+Generating RTLIL representation for module `\gate_h'.
+Successfully finished Verilog frontend.
+
+8. Executing Verilog-2005 frontend: rtl/gate_mcz.v
+Parsing SystemVerilog input from `rtl/gate_mcz.v' to AST representation.
+Generating RTLIL representation for module `\gate_mcz'.
+Successfully finished Verilog frontend.
+
+9. Executing Verilog-2005 frontend: rtl/gate_t.v
+Parsing SystemVerilog input from `rtl/gate_t.v' to AST representation.
+Generating RTLIL representation for module `\gate_t'.
+Successfully finished Verilog frontend.
+
+10. Executing Verilog-2005 frontend: rtl/gate_xz.v
+Parsing SystemVerilog input from `rtl/gate_xz.v' to AST representation.
+Generating RTLIL representation for module `\gate_x'.
+Generating RTLIL representation for module `\gate_z'.
+Successfully finished Verilog frontend.
+
+11. Executing Verilog-2005 frontend: rtl/qsim_parallel_top.v
+Parsing SystemVerilog input from `rtl/qsim_parallel_top.v' to AST representation.
+Warning: Encountered `translate_off' comment! Such legacy hot comments are supported by Yosys, but are not part of any formal language specification. Using a portable and standards-compliant construct such as `ifdef is recommended!
+Generating RTLIL representation for module `\qsim_parallel_top'.
+Warning: Replacing memory \pib with list of registers. See rtl/qsim_parallel_top.v:103
+Warning: Replacing memory \prb with list of registers. See rtl/qsim_parallel_top.v:103
+Warning: Replacing memory \pia with list of registers. See rtl/qsim_parallel_top.v:102
+Warning: Replacing memory \pra with list of registers. See rtl/qsim_parallel_top.v:102
+Warning: Replacing memory \pb with list of registers. See rtl/qsim_parallel_top.v:101, rtl/qsim_parallel_top.v:94
+Warning: Replacing memory \pa with list of registers. See rtl/qsim_parallel_top.v:101, rtl/qsim_parallel_top.v:92
+Warning: Replacing memory \lane_valid with list of registers. See rtl/qsim_parallel_top.v:86
+Successfully finished Verilog frontend.
+
+12. Executing Verilog-2005 frontend: rtl/qsim_top.v
+Parsing SystemVerilog input from `rtl/qsim_top.v' to AST representation.
+Generating RTLIL representation for module `\qsim_top'.
+Successfully finished Verilog frontend.
+
+13. Executing Verilog-2005 frontend: rtl/state_bank.v
+Parsing SystemVerilog input from `rtl/state_bank.v' to AST representation.
+Generating RTLIL representation for module `\state_bank'.
+Successfully finished Verilog frontend.
+
+14. Executing HIERARCHY pass (managing design hierarchy).
+
+14.1. Analyzing design hierarchy..
+Top module:  \qsim_parallel_top
+Used module:     \gate_datapath
+Used module:         \gate_mcz
+Used module:             \fx_negate
+Used module:         \gate_cnot
+Used module:         \gate_z
+Used module:         \gate_x
+Used module:         \gate_t
+Used module:             \fx_arith
+Used module:         \gate_h
+Used module:     \control_mask
+Used module:     \addr_gen
+Parameter \N_QUBITS = 4
+
+14.2. Executing AST frontend in derive mode using pre-parsed AST for module `\control_mask'.
+Parameter \N_QUBITS = 4
+Generating RTLIL representation for module `$paramod\control_mask\N_QUBITS=s32'00000000000000000000000000000100'.
+Parameter \N_QUBITS = 4
+Found cached RTLIL representation for module `$paramod\control_mask\N_QUBITS=s32'00000000000000000000000000000100'.
+Parameter \N_QUBITS = 4
+
+14.3. Executing AST frontend in derive mode using pre-parsed AST for module `\addr_gen'.
+Parameter \N_QUBITS = 4
+Generating RTLIL representation for module `$paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100'.
+Parameter \N_QUBITS = 4
+Found cached RTLIL representation for module `$paramod\control_mask\N_QUBITS=s32'00000000000000000000000000000100'.
+Parameter \N_QUBITS = 4
+Found cached RTLIL representation for module `$paramod\control_mask\N_QUBITS=s32'00000000000000000000000000000100'.
+Parameter \N_QUBITS = 4
+Found cached RTLIL representation for module `$paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100'.
+Reprocessing module qsim_parallel_top because instantiated module $paramod\control_mask\N_QUBITS=s32'00000000000000000000000000000100 has become available.
+Generating RTLIL representation for module `\qsim_parallel_top'.
+Warning: Replacing memory \pib with list of registers. See rtl/qsim_parallel_top.v:103
+Warning: Replacing memory \prb with list of registers. See rtl/qsim_parallel_top.v:103
+Warning: Replacing memory \pia with list of registers. See rtl/qsim_parallel_top.v:102
+Warning: Replacing memory \pra with list of registers. See rtl/qsim_parallel_top.v:102
+Warning: Replacing memory \pb with list of registers. See rtl/qsim_parallel_top.v:101, rtl/qsim_parallel_top.v:94
+Warning: Replacing memory \pa with list of registers. See rtl/qsim_parallel_top.v:101, rtl/qsim_parallel_top.v:92
+Warning: Replacing memory \lane_valid with list of registers. See rtl/qsim_parallel_top.v:86
+
+14.4. Analyzing design hierarchy..
+Top module:  \qsim_parallel_top
+Used module:     \gate_datapath
+Used module:         \gate_mcz
+Used module:             \fx_negate
+Used module:         \gate_cnot
+Used module:         \gate_z
+Used module:         \gate_x
+Used module:         \gate_t
+Used module:             \fx_arith
+Used module:         \gate_h
+Used module:     \control_mask
+Used module:     \addr_gen
+Parameter \N_QUBITS = 4
+Found cached RTLIL representation for module `$paramod\control_mask\N_QUBITS=s32'00000000000000000000000000000100'.
+Parameter \N_QUBITS = 4
+Found cached RTLIL representation for module `$paramod\control_mask\N_QUBITS=s32'00000000000000000000000000000100'.
+Parameter \N_QUBITS = 4
+Found cached RTLIL representation for module `$paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100'.
+Parameter \N_QUBITS = 4
+Found cached RTLIL representation for module `$paramod\control_mask\N_QUBITS=s32'00000000000000000000000000000100'.
+Parameter \N_QUBITS = 4
+Found cached RTLIL representation for module `$paramod\control_mask\N_QUBITS=s32'00000000000000000000000000000100'.
+Parameter \N_QUBITS = 4
+Found cached RTLIL representation for module `$paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100'.
+
+14.5. Analyzing design hierarchy..
+Top module:  \qsim_parallel_top
+Used module:     \gate_datapath
+Used module:         \gate_mcz
+Used module:             \fx_negate
+Used module:         \gate_cnot
+Used module:         \gate_z
+Used module:         \gate_x
+Used module:         \gate_t
+Used module:             \fx_arith
+Used module:         \gate_h
+Used module:     $paramod\control_mask\N_QUBITS=s32'00000000000000000000000000000100
+Used module:     $paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100
+
+14.6. Analyzing design hierarchy..
+Top module:  \qsim_parallel_top
+Used module:     \gate_datapath
+Used module:         \gate_mcz
+Used module:             \fx_negate
+Used module:         \gate_cnot
+Used module:         \gate_z
+Used module:         \gate_x
+Used module:         \gate_t
+Used module:             \fx_arith
+Used module:         \gate_h
+Used module:     $paramod\control_mask\N_QUBITS=s32'00000000000000000000000000000100
+Used module:     $paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100
+Removing unused module `\state_bank'.
+Removing unused module `\qsim_top'.
+Removing unused module `\qsim_controller'.
+Removing unused module `\control_mask'.
+Removing unused module `\addr_gen'.
+Removed 5 unused modules.
+Mapping positional arguments of cell gate_z.u1 (fx_negate).
+Mapping positional arguments of cell gate_z.u0 (fx_negate).
+Mapping positional arguments of cell gate_t.u1 (fx_arith).
+Mapping positional arguments of cell gate_t.u0 (fx_arith).
+Mapping positional arguments of cell gate_mcz.u3 (fx_negate).
+Mapping positional arguments of cell gate_mcz.u2 (fx_negate).
+Mapping positional arguments of cell gate_mcz.u1 (fx_negate).
+Mapping positional arguments of cell gate_mcz.u0 (fx_negate).
+Mapping positional arguments of cell gate_h.u3 (fx_arith).
+Mapping positional arguments of cell gate_h.u2 (fx_arith).
+Mapping positional arguments of cell gate_h.u1 (fx_arith).
+Mapping positional arguments of cell gate_h.u0 (fx_arith).
+Mapping positional arguments of cell gate_datapath.m (gate_mcz).
+Mapping positional arguments of cell gate_datapath.c (gate_cnot).
+Mapping positional arguments of cell gate_datapath.z (gate_z).
+Mapping positional arguments of cell gate_datapath.x (gate_x).
+Mapping positional arguments of cell gate_datapath.t (gate_t).
+Mapping positional arguments of cell gate_datapath.h (gate_h).
+
+15. Executing PROC pass (convert processes to netlists).
+
+15.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+15.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$rtl/gate_datapath.v:22$187 in module gate_datapath.
+Marked 2 switch rules as full_case in process $proc$rtl/fx_arith.v:10$176 in module fx_arith.
+Removed 1 dead cases from process $proc$rtl/qsim_parallel_top.v:80$1094 in module qsim_parallel_top.
+Marked 13 switch rules as full_case in process $proc$rtl/qsim_parallel_top.v:80$1094 in module qsim_parallel_top.
+Marked 1 switch rules as full_case in process $proc$rtl/addr_gen.v:24$986 in module $paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100.
+Removed a total of 1 dead cases.
+
+15.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 5 redundant assignments.
+Promoted 91 assignments to connections.
+
+15.4. Executing PROC_INIT pass (extract init attributes).
+
+15.5. Executing PROC_ARST pass (detect async resets in processes).
+
+15.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~18 debug messages>
+
+15.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\gate_datapath.$proc$rtl/gate_datapath.v:22$187'.
+     1/4: $1\y_b_im[15:0]
+     2/4: $1\y_b_re[15:0]
+     3/4: $1\y_a_im[15:0]
+     4/4: $1\y_a_re[15:0]
+Creating decoders for process `\fx_arith.$proc$rtl/fx_arith.v:10$176'.
+     1/2: $2\scaled[15:0]
+     2/2: $1\scaled[15:0]
+Creating decoders for process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:0$1341'.
+Creating decoders for process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+     1/184: $0\lane_valid[0][1:0] [1]
+     2/184: $0\lane_valid[0][1:0] [0]
+     3/184: $5\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.$result[0:0]$1296
+     4/184: $4\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.$result[0:0]$1292
+     5/184: $3\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.$result[0:0]$1281
+     6/184: $3\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.v[5:0]$1287
+     7/184: $3\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.m[5:0]$1286
+     8/184: $3\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.c[2:0]$1285
+     9/184: $3\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.t[2:0]$1284
+    10/184: $3\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.op[2:0]$1283
+    11/184: $3\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.w[31:0]$1282
+    12/184: $2\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.v[5:0]$1280
+    13/184: $2\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.m[5:0]$1279
+    14/184: $2\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.c[2:0]$1278
+    15/184: $2\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.t[2:0]$1277
+    16/184: $2\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.op[2:0]$1276
+    17/184: $2\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.w[31:0]$1275
+    18/184: $2\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.$result[0:0]$1274
+    19/184: $3\j[31:0]
+    20/184: $3$memwr$\mem_im$rtl/qsim_parallel_top.v:95$1088_EN[15:0]$1271
+    21/184: $3$memwr$\mem_im$rtl/qsim_parallel_top.v:95$1088_DATA[15:0]$1270
+    22/184: $3$memwr$\mem_im$rtl/qsim_parallel_top.v:95$1088_ADDR[3:0]$1269
+    23/184: $3$memwr$\mem_re$rtl/qsim_parallel_top.v:94$1087_EN[15:0]$1268
+    24/184: $3$memwr$\mem_re$rtl/qsim_parallel_top.v:94$1087_DATA[15:0]$1267
+    25/184: $3$memwr$\mem_re$rtl/qsim_parallel_top.v:94$1087_ADDR[3:0]$1266
+    26/184: $3$memwr$\mem_im$rtl/qsim_parallel_top.v:93$1086_EN[15:0]$1265
+    27/184: $3$memwr$\mem_im$rtl/qsim_parallel_top.v:93$1086_DATA[15:0]$1264
+    28/184: $3$memwr$\mem_im$rtl/qsim_parallel_top.v:93$1086_ADDR[3:0]$1263
+    29/184: $3$memwr$\mem_re$rtl/qsim_parallel_top.v:92$1085_EN[15:0]$1262
+    30/184: $3$memwr$\mem_re$rtl/qsim_parallel_top.v:92$1085_DATA[15:0]$1261
+    31/184: $3$memwr$\mem_re$rtl/qsim_parallel_top.v:92$1085_ADDR[3:0]$1260
+    32/184: $3$memwr$\mem_im$rtl/qsim_parallel_top.v:95$1084_EN[15:0]$1259
+    33/184: $3$memwr$\mem_im$rtl/qsim_parallel_top.v:95$1084_DATA[15:0]$1258
+    34/184: $3$memwr$\mem_im$rtl/qsim_parallel_top.v:95$1084_ADDR[3:0]$1257
+    35/184: $3$memwr$\mem_re$rtl/qsim_parallel_top.v:94$1083_EN[15:0]$1256
+    36/184: $3$memwr$\mem_re$rtl/qsim_parallel_top.v:94$1083_DATA[15:0]$1255
+    37/184: $3$memwr$\mem_re$rtl/qsim_parallel_top.v:94$1083_ADDR[3:0]$1254
+    38/184: $3$memwr$\mem_im$rtl/qsim_parallel_top.v:93$1082_EN[15:0]$1253
+    39/184: $3$memwr$\mem_im$rtl/qsim_parallel_top.v:93$1082_DATA[15:0]$1252
+    40/184: $3$memwr$\mem_im$rtl/qsim_parallel_top.v:93$1082_ADDR[3:0]$1251
+    41/184: $3$memwr$\mem_re$rtl/qsim_parallel_top.v:92$1081_EN[15:0]$1250
+    42/184: $3$memwr$\mem_re$rtl/qsim_parallel_top.v:92$1081_DATA[15:0]$1249
+    43/184: $3$memwr$\mem_re$rtl/qsim_parallel_top.v:92$1081_ADDR[3:0]$1248
+    44/184: $2\j[31:0]
+    45/184: $2$memwr$\mem_im$rtl/qsim_parallel_top.v:95$1088_EN[15:0]$1247
+    46/184: $2$memwr$\mem_im$rtl/qsim_parallel_top.v:95$1088_DATA[15:0]$1246
+    47/184: $2$memwr$\mem_im$rtl/qsim_parallel_top.v:95$1088_ADDR[3:0]$1245
+    48/184: $2$memwr$\mem_re$rtl/qsim_parallel_top.v:94$1087_EN[15:0]$1244
+    49/184: $2$memwr$\mem_re$rtl/qsim_parallel_top.v:94$1087_DATA[15:0]$1243
+    50/184: $2$memwr$\mem_re$rtl/qsim_parallel_top.v:94$1087_ADDR[3:0]$1242
+    51/184: $2$memwr$\mem_im$rtl/qsim_parallel_top.v:93$1086_EN[15:0]$1241
+    52/184: $2$memwr$\mem_im$rtl/qsim_parallel_top.v:93$1086_DATA[15:0]$1240
+    53/184: $2$memwr$\mem_im$rtl/qsim_parallel_top.v:93$1086_ADDR[3:0]$1239
+    54/184: $2$memwr$\mem_re$rtl/qsim_parallel_top.v:92$1085_EN[15:0]$1238
+    55/184: $2$memwr$\mem_re$rtl/qsim_parallel_top.v:92$1085_DATA[15:0]$1237
+    56/184: $2$memwr$\mem_re$rtl/qsim_parallel_top.v:92$1085_ADDR[3:0]$1236
+    57/184: $2$memwr$\mem_im$rtl/qsim_parallel_top.v:95$1084_EN[15:0]$1235
+    58/184: $2$memwr$\mem_im$rtl/qsim_parallel_top.v:95$1084_DATA[15:0]$1234
+    59/184: $2$memwr$\mem_im$rtl/qsim_parallel_top.v:95$1084_ADDR[3:0]$1233
+    60/184: $2$memwr$\mem_re$rtl/qsim_parallel_top.v:94$1083_EN[15:0]$1232
+    61/184: $2$memwr$\mem_re$rtl/qsim_parallel_top.v:94$1083_DATA[15:0]$1231
+    62/184: $2$memwr$\mem_re$rtl/qsim_parallel_top.v:94$1083_ADDR[3:0]$1230
+    63/184: $2$memwr$\mem_im$rtl/qsim_parallel_top.v:93$1082_EN[15:0]$1229
+    64/184: $2$memwr$\mem_im$rtl/qsim_parallel_top.v:93$1082_DATA[15:0]$1228
+    65/184: $2$memwr$\mem_im$rtl/qsim_parallel_top.v:93$1082_ADDR[3:0]$1227
+    66/184: $2$memwr$\mem_re$rtl/qsim_parallel_top.v:92$1081_EN[15:0]$1226
+    67/184: $2$memwr$\mem_re$rtl/qsim_parallel_top.v:92$1081_DATA[15:0]$1225
+    68/184: $2$memwr$\mem_re$rtl/qsim_parallel_top.v:92$1081_ADDR[3:0]$1224
+    69/184: $0\valid_pipe[2:0] [1]
+    70/184: $0\valid_pipe[2:0] [0]
+    71/184: $0\valid_pipe[2:0] [2]
+    72/184: $0\lane_valid[2][1:0]
+    73/184: $0\lane_valid[1][1:0]
+    74/184: $6\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.$result[0:0]$1304
+    75/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:85$1080_EN[15:0]$1199
+    76/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1079_EN[15:0]$1198
+    77/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1078_EN[15:0]$1197
+    78/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1077_EN[15:0]$1196
+    79/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1076_EN[15:0]$1195
+    80/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1075_EN[15:0]$1194
+    81/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1074_EN[15:0]$1193
+    82/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1073_EN[15:0]$1192
+    83/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1072_EN[15:0]$1191
+    84/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1071_EN[15:0]$1190
+    85/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1070_EN[15:0]$1189
+    86/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1069_EN[15:0]$1188
+    87/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1068_EN[15:0]$1187
+    88/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1067_EN[15:0]$1186
+    89/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1066_EN[15:0]$1185
+    90/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1065_EN[15:0]$1184
+    91/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1064_EN[15:0]$1183
+    92/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1063_EN[15:0]$1182
+    93/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1062_EN[15:0]$1181
+    94/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1061_EN[15:0]$1180
+    95/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1060_EN[15:0]$1179
+    96/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1059_EN[15:0]$1178
+    97/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1058_EN[15:0]$1177
+    98/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1057_EN[15:0]$1176
+    99/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1056_EN[15:0]$1175
+   100/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1055_EN[15:0]$1174
+   101/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1054_EN[15:0]$1173
+   102/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1053_EN[15:0]$1172
+   103/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1052_EN[15:0]$1171
+   104/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1051_EN[15:0]$1170
+   105/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1050_EN[15:0]$1169
+   106/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1049_EN[15:0]$1168
+   107/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1048_EN[15:0]$1167
+   108/184: $1\i[31:0]
+   109/184: $0\done[0:0]
+   110/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:95$1088_EN[15:0]$1223
+   111/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:95$1088_DATA[15:0]$1222
+   112/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:95$1088_ADDR[3:0]$1221
+   113/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:94$1087_EN[15:0]$1220
+   114/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:94$1087_DATA[15:0]$1219
+   115/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:94$1087_ADDR[3:0]$1218
+   116/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:93$1086_EN[15:0]$1217
+   117/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:93$1086_DATA[15:0]$1216
+   118/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:93$1086_ADDR[3:0]$1215
+   119/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:92$1085_EN[15:0]$1214
+   120/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:92$1085_DATA[15:0]$1213
+   121/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:92$1085_ADDR[3:0]$1212
+   122/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:95$1084_EN[15:0]$1211
+   123/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:95$1084_DATA[15:0]$1210
+   124/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:95$1084_ADDR[3:0]$1209
+   125/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:94$1083_EN[15:0]$1208
+   126/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:94$1083_DATA[15:0]$1207
+   127/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:94$1083_ADDR[3:0]$1206
+   128/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:93$1082_EN[15:0]$1205
+   129/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:93$1082_DATA[15:0]$1204
+   130/184: $1$memwr$\mem_im$rtl/qsim_parallel_top.v:93$1082_ADDR[3:0]$1203
+   131/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:92$1081_EN[15:0]$1202
+   132/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:92$1081_DATA[15:0]$1201
+   133/184: $1$memwr$\mem_re$rtl/qsim_parallel_top.v:92$1081_ADDR[3:0]$1200
+   134/184: $1\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.v[5:0]$1166
+   135/184: $1\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.m[5:0]$1165
+   136/184: $1\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.c[2:0]$1164
+   137/184: $1\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.t[2:0]$1163
+   138/184: $1\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.op[2:0]$1162
+   139/184: $1\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.w[31:0]$1161
+   140/184: $1\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.$result[0:0]$1160
+   141/184: $1\j[31:0]
+   142/184: $0\pib[5][15:0]
+   143/184: $0\pib[4][15:0]
+   144/184: $0\pib[3][15:0]
+   145/184: $0\pib[2][15:0]
+   146/184: $0\pib[1][15:0]
+   147/184: $0\pib[0][15:0]
+   148/184: $0\prb[5][15:0]
+   149/184: $0\prb[4][15:0]
+   150/184: $0\prb[3][15:0]
+   151/184: $0\prb[2][15:0]
+   152/184: $0\prb[1][15:0]
+   153/184: $0\prb[0][15:0]
+   154/184: $0\pia[5][15:0]
+   155/184: $0\pia[4][15:0]
+   156/184: $0\pia[3][15:0]
+   157/184: $0\pia[2][15:0]
+   158/184: $0\pia[1][15:0]
+   159/184: $0\pia[0][15:0]
+   160/184: $0\pra[5][15:0]
+   161/184: $0\pra[4][15:0]
+   162/184: $0\pra[3][15:0]
+   163/184: $0\pra[2][15:0]
+   164/184: $0\pra[1][15:0]
+   165/184: $0\pra[0][15:0]
+   166/184: $0\pb[5][3:0]
+   167/184: $0\pb[4][3:0]
+   168/184: $0\pb[3][3:0]
+   169/184: $0\pb[2][3:0]
+   170/184: $0\pb[1][3:0]
+   171/184: $0\pb[0][3:0]
+   172/184: $0\pa[5][3:0]
+   173/184: $0\pa[4][3:0]
+   174/184: $0\pa[3][3:0]
+   175/184: $0\pa[2][3:0]
+   176/184: $0\pa[1][3:0]
+   177/184: $0\pa[0][3:0]
+   178/184: $0\wait_count[31:0]
+   179/184: $0\cycles[31:0]
+   180/184: $0\next_pair[3:0]
+   181/184: $0\fsm[1:0]
+   182/184: $0\last_cycles[31:0]
+   183/184: $0\active_instr[31:0]
+   184/184: $0\err[0:0]
+Creating decoders for process `$paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100.$proc$rtl/addr_gen.v:24$986'.
+     1/4: $1\addr_b[3:0]
+     2/4: $1$bitselwrite$data$rtl/addr_gen.v:35$983[3:0]$998
+     3/4: $1$bitselwrite$mask$rtl/addr_gen.v:35$982[3:0]$997
+     4/4: $1$bitselwrite$sel$rtl/addr_gen.v:35$984[1:0]$999
+
+15.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\gate_datapath.\y_a_re' from process `\gate_datapath.$proc$rtl/gate_datapath.v:22$187'.
+No latch inferred for signal `\gate_datapath.\y_a_im' from process `\gate_datapath.$proc$rtl/gate_datapath.v:22$187'.
+No latch inferred for signal `\gate_datapath.\y_b_re' from process `\gate_datapath.$proc$rtl/gate_datapath.v:22$187'.
+No latch inferred for signal `\gate_datapath.\y_b_im' from process `\gate_datapath.$proc$rtl/gate_datapath.v:22$187'.
+No latch inferred for signal `\fx_arith.\scaled' from process `\fx_arith.$proc$rtl/fx_arith.v:10$176'.
+No latch inferred for signal `\qsim_parallel_top.\aa[0]' from process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:0$1341'.
+No latch inferred for signal `\qsim_parallel_top.\aa[1]' from process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:0$1341'.
+No latch inferred for signal `\qsim_parallel_top.\bb[0]' from process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:0$1341'.
+No latch inferred for signal `\qsim_parallel_top.\bb[1]' from process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:0$1341'.
+No latch inferred for signal `\qsim_parallel_top.\ya_re[0]' from process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:0$1341'.
+No latch inferred for signal `\qsim_parallel_top.\ya_re[1]' from process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:0$1341'.
+No latch inferred for signal `\qsim_parallel_top.\ya_im[0]' from process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:0$1341'.
+No latch inferred for signal `\qsim_parallel_top.\ya_im[1]' from process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:0$1341'.
+No latch inferred for signal `\qsim_parallel_top.\yb_re[0]' from process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:0$1341'.
+No latch inferred for signal `\qsim_parallel_top.\yb_re[1]' from process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:0$1341'.
+No latch inferred for signal `\qsim_parallel_top.\yb_im[0]' from process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:0$1341'.
+No latch inferred for signal `\qsim_parallel_top.\yb_im[1]' from process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:0$1341'.
+No latch inferred for signal `$paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100.\addr_a' from process `$paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100.$proc$rtl/addr_gen.v:24$986'.
+No latch inferred for signal `$paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100.\addr_b' from process `$paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100.$proc$rtl/addr_gen.v:24$986'.
+No latch inferred for signal `$paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100.\lower_mask' from process `$paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100.$proc$rtl/addr_gen.v:24$986'.
+No latch inferred for signal `$paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100.\lower_bits' from process `$paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100.$proc$rtl/addr_gen.v:24$986'.
+No latch inferred for signal `$paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100.\upper_bits' from process `$paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100.$proc$rtl/addr_gen.v:24$986'.
+No latch inferred for signal `$paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100.$bitselwrite$mask$rtl/addr_gen.v:35$982' from process `$paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100.$proc$rtl/addr_gen.v:24$986'.
+No latch inferred for signal `$paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100.$bitselwrite$data$rtl/addr_gen.v:35$983' from process `$paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100.$proc$rtl/addr_gen.v:24$986'.
+No latch inferred for signal `$paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100.$bitselwrite$sel$rtl/addr_gen.v:35$984' from process `$paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100.$proc$rtl/addr_gen.v:24$986'.
+
+15.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\qsim_parallel_top.\done' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2447' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\err' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2448' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\active_instr' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2449' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\last_cycles' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2450' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\fsm' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2451' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\next_pair' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2452' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\cycles' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2453' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\wait_count' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2454' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\valid_pipe' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2455' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\i' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2456' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\j' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2457' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\lane_valid[0]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2458' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\lane_valid[1]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2459' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\lane_valid[2]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2460' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pa[0]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2461' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pa[1]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2462' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pa[2]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2463' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pa[3]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2464' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pa[4]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2465' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pa[5]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2466' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pb[0]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2467' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pb[1]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2468' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pb[2]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2469' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pb[3]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2470' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pb[4]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2471' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pb[5]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2472' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pra[0]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2473' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pra[1]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2474' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pra[2]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2475' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pra[3]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2476' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pra[4]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2477' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pra[5]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2478' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pia[0]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2479' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pia[1]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2480' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pia[2]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2481' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pia[3]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2482' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pia[4]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2483' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pia[5]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2484' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\prb[0]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2485' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\prb[1]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2486' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\prb[2]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2487' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\prb[3]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2488' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\prb[4]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2489' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\prb[5]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2490' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pib[0]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2491' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pib[1]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2492' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pib[2]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2493' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pib[3]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2494' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pib[4]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2495' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\pib[5]' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2496' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.$result' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2497' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.w' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2498' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.op' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2499' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.t' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2500' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.c' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2501' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.m' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2502' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.\instruction_ok$func$rtl/qsim_parallel_top.v:110$1047.v' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2503' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1048_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2504' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1049_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2505' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1050_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2506' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1051_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2507' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1052_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2508' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1053_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2509' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1054_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2510' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1055_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2511' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1056_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2512' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1057_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2513' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1058_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2514' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1059_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2515' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1060_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2516' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1061_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2517' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1062_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2518' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1063_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2519' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1064_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2520' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1065_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2521' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1066_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2522' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1067_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2523' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1068_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2524' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1069_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2525' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1070_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2526' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1071_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2527' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1072_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2528' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1073_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2529' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1074_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2530' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1075_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2531' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1076_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2532' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1077_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2533' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:84$1078_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2534' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:84$1079_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2535' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:85$1080_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2536' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:92$1081_ADDR' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2537' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:92$1081_DATA' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2538' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:92$1081_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2539' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:93$1082_ADDR' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2540' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:93$1082_DATA' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2541' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:93$1082_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2542' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:94$1083_ADDR' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2543' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:94$1083_DATA' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2544' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:94$1083_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2545' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:95$1084_ADDR' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2546' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:95$1084_DATA' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2547' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:95$1084_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2548' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:92$1085_ADDR' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2549' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:92$1085_DATA' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2550' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:92$1085_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2551' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:93$1086_ADDR' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2552' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:93$1086_DATA' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2553' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:93$1086_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2554' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:94$1087_ADDR' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2555' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:94$1087_DATA' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2556' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_re$rtl/qsim_parallel_top.v:94$1087_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2557' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:95$1088_ADDR' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2558' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:95$1088_DATA' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2559' with positive edge clock.
+Creating register for signal `\qsim_parallel_top.$memwr$\mem_im$rtl/qsim_parallel_top.v:95$1088_EN' using process `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+  created $dff cell `$procdff$2560' with positive edge clock.
+
+15.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+15.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 1 empty switch in `\gate_datapath.$proc$rtl/gate_datapath.v:22$187'.
+Removing empty process `gate_datapath.$proc$rtl/gate_datapath.v:22$187'.
+Found and cleaned up 2 empty switches in `\fx_arith.$proc$rtl/fx_arith.v:10$176'.
+Removing empty process `fx_arith.$proc$rtl/fx_arith.v:10$176'.
+Removing empty process `qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:0$1341'.
+Found and cleaned up 14 empty switches in `\qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+Removing empty process `qsim_parallel_top.$proc$rtl/qsim_parallel_top.v:80$1094'.
+Found and cleaned up 1 empty switch in `$paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100.$proc$rtl/addr_gen.v:24$986'.
+Removing empty process `$paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100.$proc$rtl/addr_gen.v:24$986'.
+Cleaned up 18 empty switches.
+
+15.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module gate_z.
+Optimizing module gate_x.
+Optimizing module gate_t.
+Optimizing module gate_mcz.
+Optimizing module gate_h.
+Optimizing module gate_datapath.
+<suppressed ~4 debug messages>
+Optimizing module gate_cnot.
+Optimizing module fx_negate.
+Optimizing module fx_arith.
+<suppressed ~1 debug messages>
+Optimizing module qsim_parallel_top.
+<suppressed ~214 debug messages>
+Optimizing module $paramod\control_mask\N_QUBITS=s32'00000000000000000000000000000100.
+<suppressed ~3 debug messages>
+Optimizing module $paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100.
+<suppressed ~1 debug messages>
+
+16. Executing CHECK pass (checking for obvious problems).
+Checking module gate_z...
+Checking module gate_x...
+Checking module gate_t...
+Checking module gate_mcz...
+Checking module gate_h...
+Checking module gate_datapath...
+Checking module gate_cnot...
+Checking module fx_negate...
+Checking module fx_arith...
+Checking module qsim_parallel_top...
+Checking module $paramod\control_mask\N_QUBITS=s32'00000000000000000000000000000100...
+Checking module $paramod\addr_gen\N_QUBITS=s32'00000000000000000000000000000100...
+Found and reported 0 problems.
+
+Warnings: 8 unique messages, 15 total
+End of script. Logfile hash: 3a212800be, CPU: user 0.15s system 0.03s, MEM: 19.94 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 37% 14x read_verilog (0 sec), 17% 1x check (0 sec), ...

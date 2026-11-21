@@ -20,7 +20,7 @@ module qsim_parallel_top #(
     localparam integer COUNT=(1<<N_QUBITS);
     localparam integer PAIRS=COUNT/2;
     localparam integer IDX_W=N_QUBITS-1;
-    localparam integer ST_IDLE=0,ST_ISSUE=1,ST_WAIT=2,ST_DONE=3;
+    localparam [1:0] ST_IDLE=2'd0,ST_ISSUE=2'd1,ST_WAIT=2'd2,ST_DONE=2'd3;
     reg [1:0] fsm;
     reg [31:0] active_instr;
     reg [IDX_W:0] next_pair;
@@ -45,12 +45,12 @@ module qsim_parallel_top #(
     wire [LANES-1:0] active_lane;
     wire [N_QUBITS-1:0] aa[0:LANES-1],bb[0:LANES-1];
     wire signed [15:0] ya_re[0:LANES-1],ya_im[0:LANES-1],yb_re[0:LANES-1],yb_im[0:LANES-1];
-    wire [LANES-1:0] addr_ok,dp_ok;
+    wire [LANES-1:0] addr_ok,dp_ok; // diagnostic validity outputs
     genvar g;
     generate for(g=0;g<LANES;g=g+1) begin: lane
-        wire [IDX_W-1:0] idx=next_pair+g;
+        wire [IDX_W-1:0] idx=IDX_W'(next_pair+g);
         wire cvalid,cswap,mvalid_a,mflip_a,mvalid_b,mflip_b;
-        assign active_lane[g]=(next_pair+g<PAIRS);
+        assign active_lane[g]=(($unsigned(next_pair)+g)<PAIRS);
         addr_gen #(.N_QUBITS(N_QUBITS)) u_addr(.target_q(pair_target),.pair_index(idx),.addr_a(aa[g]),.addr_b(bb[g]),.valid(addr_ok[g]));
         control_mask #(.N_QUBITS(N_QUBITS)) ca(.control_q(control),.target_q(target),.pair_addr_a(aa[g]),.basis_addr(aa[g]),.mask(mask),.value(value),.cnot_valid(cvalid),.cnot_swap(cswap),.mcz_valid(mvalid_a),.mcz_flip(mflip_a));
         control_mask #(.N_QUBITS(N_QUBITS)) cb(.control_q(control),.target_q(target),.pair_addr_a(bb[g]),.basis_addr(bb[g]),.mask(mask),.value(value),.cnot_valid(),.cnot_swap(),.mcz_valid(mvalid_b),.mcz_flip(mflip_b));
@@ -66,15 +66,17 @@ module qsim_parallel_top #(
         begin
             op=w[2:0];t=w[5:3];c=w[8:6];m=w[14:9];v=w[20:15];
             instruction_ok=(w[31:21]==0)&&(op<=`QSIM_OP_MCZ);
-            if(op<=`QSIM_OP_T) instruction_ok=instruction_ok&&(t<N_QUBITS);
-            else if(op==`QSIM_OP_CNOT) instruction_ok=instruction_ok&&(t<N_QUBITS)&&(c<N_QUBITS)&&(c!=t);
+            if(op<=`QSIM_OP_T) instruction_ok=instruction_ok&&(t<3'(N_QUBITS));
+            else if(op==`QSIM_OP_CNOT) instruction_ok=instruction_ok&&(t<3'(N_QUBITS))&&(c<3'(N_QUBITS))&&(c!=t);
             else if(op==`QSIM_OP_MCZ) instruction_ok=instruction_ok&&((m>>(N_QUBITS))==0)&&((v&~m)==0);
         end
     endfunction
-    integer i,j,k;
+    integer i,j;
+    // synopsys translate_off
     initial begin
         if(N_QUBITS<4||N_QUBITS>6||DATA_WIDTH!=16||PIPE_STAGES<1||LANES<1||LANES>8) $fatal(1,"Unsupported Phase 5 parameters");
     end
+    // synopsys translate_on
     always @(posedge clk) begin
         if(!rst_n) begin
             fsm<=ST_IDLE;active_instr<=0;next_pair<=0;cycles<=0;last_cycles<=0;wait_count<=0;done<=0;err<=0;
@@ -117,7 +119,7 @@ module qsim_parallel_top #(
                         pra[0][j]<=ya_re[j];pia[0][j]<=ya_im[j];
                         prb[0][j]<=yb_re[j];pib[0][j]<=yb_im[j];
                     end
-                    if(next_pair+LANES>=PAIRS) begin
+                    if(($unsigned(next_pair)+LANES)>=PAIRS) begin
                         wait_count<=PIPE_STAGES;fsm<=ST_WAIT;
                     end else begin
                         // Conservative drain before next batch prevents RAW hazards.
@@ -126,8 +128,8 @@ module qsim_parallel_top #(
                 end
                 ST_WAIT: begin
                     if(wait_count==0) begin
-                        if(next_pair+LANES>=PAIRS) fsm<=ST_DONE;
-                        else begin next_pair<=next_pair+LANES;fsm<=ST_ISSUE;end
+                        if(($unsigned(next_pair)+LANES)>=PAIRS) fsm<=ST_DONE;
+                        else begin next_pair<=(IDX_W+1)'(next_pair+LANES);fsm<=ST_ISSUE;end
                     end else wait_count<=wait_count-1;
                 end
                 ST_DONE: begin done<=1;last_cycles<=cycles+1;fsm<=ST_IDLE;end

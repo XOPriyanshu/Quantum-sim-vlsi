@@ -17,10 +17,10 @@ module control_mask #(
     output wire mcz_flip
 );
     // For CNOT, both members of a target pair have the same control bit.
-    assign cnot_valid = (control_q < N_QUBITS) &&
-                        (target_q < N_QUBITS) &&
+    assign cnot_valid = (control_q < 3'(N_QUBITS)) &&
+                        (target_q < 3'(N_QUBITS)) &&
                         (control_q != target_q);
-    assign cnot_swap = cnot_valid && pair_addr_a[control_q];
+    assign cnot_swap = cnot_valid && pair_addr_a[control_q[$clog2(N_QUBITS)-1:0]];
 
     // Mask/value fields are always six bits, including for 4/5 qubits.
     // Reject any bit outside the implemented qubit range and any value

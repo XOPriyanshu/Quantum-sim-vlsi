@@ -1,30 +1,38 @@
+
 `include "qsim_params.vh"
 
-// Combinational pair-address generator for one-qubit gates.
-// pair_index ranges from 0 to 2^(N_QUBITS-1)-1.
-// Inserting a zero at target bit q gives address a;
-// setting that bit gives partner address b.
+// Parameterized quantum amplitude pair address generator.
+// Generates two addresses differing at target qubit q.
+
 module addr_gen #(
     parameter integer N_QUBITS = `QSIM_DEFAULT_N_QUBITS
 )(
-    input  wire [2:0]                 target_q,
-    input  wire [N_QUBITS-2:0]        pair_index,
-    output reg  [N_QUBITS-1:0]        addr_a,
-    output reg  [N_QUBITS-1:0]        addr_b,
-    output wire                       valid
+    input  wire [2:0]          target_q,
+    input  wire [N_QUBITS-2:0] pair_index,
+    output reg  [N_QUBITS-1:0] addr_a,
+    output reg  [N_QUBITS-1:0] addr_b,
+    output wire                valid
 );
-    integer bit_pos;
+
+    // Valid target qubit
+    assign valid = (target_q < 3'(N_QUBITS));
+
+    reg [N_QUBITS-1:0] lower_mask;
+    reg [N_QUBITS-1:0] lower_bits;
+    reg [N_QUBITS-1:0] upper_bits;
+
     always @* begin
-        addr_a = {N_QUBITS{1'b0}};
-        for (bit_pos = 0; bit_pos < N_QUBITS; bit_pos = bit_pos + 1) begin
-            if (bit_pos < target_q)
-                addr_a[bit_pos] = pair_index[bit_pos];
-            else if (bit_pos > target_q)
-                addr_a[bit_pos] = pair_index[bit_pos-1];
-        end
+        lower_mask = ({N_QUBITS{1'b1}} >>
+                      (N_QUBITS - target_q));
+
+        lower_bits = pair_index & lower_mask;
+        upper_bits = (pair_index & ~lower_mask) << 1;
+
+        addr_a = lower_bits | upper_bits;
         addr_b = addr_a;
-        if (target_q < N_QUBITS)
-            addr_b[target_q] = 1'b1;
+
+        if (valid)
+            addr_b[target_q[$clog2(N_QUBITS)-1:0]] = 1'b1;
     end
-    assign valid = (target_q < N_QUBITS);
+
 endmodule
